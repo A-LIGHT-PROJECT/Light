@@ -1,3 +1,5 @@
+# Contribution
+You can always contribute to this project to add more operations and extra features!
 # Bytecode Operation Specification
 | Byte | Operation | Description |
 | :---: | :---: | :---: |
@@ -10,3 +12,12 @@
 | 0x06 | OP_CREATE | Creates a file with zero text. |
 | 0x07 | OP_CREATEDIR | Creates a new directory |
 | 0x08 | OP_DEF | Adds your string to the wrapper, unlike OP_SET_SETTER, it doesn't add spaces in the beginning. |
+
+# Bytecode Flag Specification
+| Byte 1 | Byte 2 | Flag | Description |
+| :---: | :---: | :---: | :---: |
+| 0x00 | 0x00 | SE_NOFLAG | It outputs no flag... |
+| 0x00 | 0x01 | SE_SOURCE | Example: -c in GCC |
+| 0x00 | 0x02 | SE_VERSION | Example: -std=c in GCC |
+| 0x00 | 0x04 | SE_VERBOSE | Example: -v in GCC |
+| 0x00 | 0x05 | SE_QUIET | Example: -quiet in GCC |
