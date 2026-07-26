@@ -11,7 +11,7 @@ This is designed for build systems so that you can have flag abstraction and mor
 # Non-goals of Light
 - Have people write Light directly in Bytecode all day, all night.
 - Have a full fledged programming language.
-- Be more than just a direct build system.
+- Being focused on other aspects other than building your projects.
 
 # Executing Light files with a Virtual machine
 Any .light file can be ran using the light command, like this
