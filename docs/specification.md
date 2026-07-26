@@ -12,6 +12,8 @@ You can always contribute to this project to add more operations and extra featu
 | 0x06 | OP_CREATE | Creates a file with zero text. |
 | 0x07 | OP_CREATEDIR | Creates a new directory |
 | 0x08 | OP_DEF | Adds your string to the wrapper, unlike OP_SET_SETTER, it doesn't add spaces in the beginning. |
+| 0x09 | OP_PUSH | Pushes all the wrappers in a process of execution, this is made for safety and asynchronous control |
+| 0x0A | OP_NOTIFY | Notifies externally and changes something if an error or condition was triggered, made for JIT compilation |
 
 # Bytecode Flag Specification
 | Byte 1 | Byte 2 | Flag | Description |
