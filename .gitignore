@@ -1,5 +1,14 @@
-docs/
+# Stuff that can't change outside of Github website
+docs/*
 TestLight/
 *.sh
-*.md
 !README.md
+
+# These are executable binaries...
+*.exe
+*.out
+*.o
+*
+# Since extensionless files can be executables, we need this...
+!*/
+!*.*
