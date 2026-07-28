@@ -46,7 +46,7 @@ namespace Light {
 		SE_ABIT_OPTIMIZE,
 		SE_ALOT_OPTIMIZE,
 		SE_MAX_OPTIMIZE,
-		SE_END = 0xFF
+		SE_END = 0xFD
 	} SE_CODE;
 
 	typedef enum : char {
@@ -55,7 +55,7 @@ namespace Light {
 	} CODE_CATEGORY;
 
 	typedef enum : char {
-		TRIG_NULL
+		TRIG_NULL,
 		TRIG_WHEN_ERROR
 	} TRIG_CODE;
 
