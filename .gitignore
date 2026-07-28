@@ -1,3 +1,4 @@
 docs/
 *.sh
 *.md
+!README.md
