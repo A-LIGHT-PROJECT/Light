@@ -1,14 +1,46 @@
-# Stuff that can't change outside of Github website
-docs/*
+# This library is where you test things... 
 TestLight/
+# Any scripts besides setup.bash are just only for making work easier, doesn't affect the user
+*.bash
 *.sh
-!README.md
+!setup.bash
 
-# These are executable binaries...
+# These are binaries...
 *.exe
 *.out
 *.o
+*.app
+*.so
+*.appimage
+*.iso
+*.pkg
+*.dmg
+*.com
+*.msi
+*.scr
+*.dll
+*.db
+*.DS_Store
 *
 # Since extensionless files can be executables, we need this...
 !*/
 !*.*
+
+# just in case if you need private .env files
+*.env
+*.env.local
+
+# Zips and zippy
+*.zip
+*.deb
+*.rpm
+*.apk
+*.aab
+
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# All of these are included because these files are often the ones included when testing
+# Some files like .jar files or .pyc files are not included because we may not use those files
