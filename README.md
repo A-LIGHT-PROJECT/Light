@@ -27,23 +27,16 @@ infolight --help
 
 # Light Compilation
 Light is developed in C++ exclusively with no dependencies, you must be the one to compile to C++ code in order to have Light to read your parsed files.
+Light is available in many of the UNIX based operating systems:
+- Windows through MSYS2 terminal and Cygwin
+- MacOS
+- Linux
+- OpenBSD along with it's friends
 
 # GCC source compilation
 If you have GCC on msys2 or Linux Bash terminal, inside the terminal what you want to do is type these commands
 ```
-git clone https://github.com/MidLevelGameDev/Light.git
-# go into that Light Folder
-./setup.sh
+curl https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/setup.bash
+bash ./setup.bash
 ```
-And then you have to make the binary availiable everywhere you go no matter what
-```
-sudo mv ./light /usr/bin # For Linux
-```
-or
-```
-vim ~/.bashrc # type "export PATH=$PATH:/c/whatever/your/Light/folder/is"
-source ~/.bash # reset it to get this path
-```
-
-# For other compilations
-If anyone want to make some documentation on how to compile Light for Clang, MSVS, or whatever, then go do it, or you can also make some binaries for people to use, if it is trusted enough I may add it to this file too as a link.
+And follow the instructions on the setup
