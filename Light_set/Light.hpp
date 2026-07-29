@@ -11,6 +11,7 @@
 #include <atomic>
 #include <unordered_map>
 #include <utility>
+#include <functional>
 #ifndef BYTEBUILD_H
 #define BYTEBUILD_H
 
@@ -66,9 +67,13 @@ namespace Light {
 		
 	typedef char byte;
 	typedef std::vector<byte> Bytecode;
+	struct hash_pair {
+		template <class T1, class T2>
+		size_t operator()(const std::pair<T1, T2>& p) const;
+	};
 
 	extern std::queue<std::string> wrappers;
-	extern std::unordered_map<std::pair<char,char>, std::string> translationMap;
+	extern std::unordered_map<std::pair<char,char>, std::string, hash_pair> translationMap;
 	extern std::mutex safe_lock;
 	extern std::mutex emptySafe_lock;
 	extern std::condition_variable emptySafe;

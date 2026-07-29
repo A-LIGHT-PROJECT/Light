@@ -12,8 +12,20 @@
 
 namespace Light {
 	
+	
+	template <class T1, class T2>
+	size_t hash_pair::operator()(const std::pair<T1, T2>& p) const
+	{
+		size_t hash1 = std::hash<T1>{}(p.first);
+
+		size_t hash2 = std::hash<T2>{}(p.second);
+
+		return hash1 ^ (hash2 + 0x9e3779b9 + (hash1 << 6) + (hash1 >> 2));
+	}
+	
+
 	std::queue<std::string> wrappers;
-	std::unordered_map<char, std::string> translationMap;
+	std::unordered_map<std::pair<char, char>, std::string, hash_pair> translationMap;
 	std::mutex safe_lock;
 	std::mutex emptySafe_lock;
 	std::condition_variable emptySafe;
@@ -47,7 +59,7 @@ namespace Light {
 			std::string getWrapper = wrappers.front();
 			wrappers.pop();
 
-			if (std::system((char*)getWrapper) == -1) {
+			if (std::system(getWrapper.c_str()) == -1) {
 				std::cerr << "A wrapper didn't execute as expected..\n";
 			}
 
@@ -55,7 +67,7 @@ namespace Light {
 		}
 	}
 
-	void interpretation(char Byte) {
+	void interpretation(Bytecode bytecode) {
 			
 		std::string firstwrapper;
 		std::string wrapper;
@@ -144,7 +156,7 @@ namespace Light {
 		
 		char CategorySetter;
 
-		for (byte Byte : Bytecode) { 
+		for (byte Byte : bytecode) { 
 			
 			if (SetterBytesNeed) {
 				SetterBytesNeed -= 1;
@@ -264,7 +276,7 @@ namespace Light {
 					SetterCount += 1;
 					break;
 				case OP_PUSH:
-					wrappers.push_back(wrapper);
+					wrappers.push(wrapper);
 					safe_lock.unlock();
 					safe_lock.lock();	
 				default:
