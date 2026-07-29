@@ -6,14 +6,9 @@ if ! command -v g++; then
   echo "[Setup] gcc isn't installed, cannot keep going forward until you install gcc..."
   echo "---Ways to install GCC---"
   echo "MSYS2 Windows: pacman -S gcc"
-  echo "Arch: sudo pacman -S gcc"
+  echo "Arch Bash: sudo pacman -S gcc"
   echo
   exit 1
-fi
-if ! command -v git; then
-	echo "[Setup] git isn't installed, cannot keep going forward until you install git..."
-	echo
-	exit 1
 fi
 
 echo "---[WELCOME TO LIGHT SETUP]---"
@@ -45,6 +40,11 @@ EOF
 # 	* this is the main and raw .light file with OP_CODES, needed if you want to make a parser of Light.
 # EOF
 # 	read -p "options: [A]ll [S]pecifically [N]one" extrasinput
+	if ! command -v curl; then
+		echo "[Setup] curl isn't installed, cannot keep going forward until you install curl..."
+		echo
+		exit 1
+	fi
 	read -p "are you sure?[Y/n] " sure
 	if [[ $sure != "Y" ]]; then
 		echo "exiting setup.bash..."
@@ -54,9 +54,17 @@ EOF
 		rm -rf ./.templightfolder
 	fi
 	mkdir ./.templightfolder
-
-	rm -rf ./.templightfolder
+	cd ./.templightfolder
 	
+	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.hpp	
+	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.cpp
+
+	cd ..
+	
+	tempPATH="./.templightfolder"
+	gcc -I $tempPATH -c ${tempPATH}/Light.cpp -o ${tempPATH}/LightMod.o
+	
+	rm -rf $tempPATH
 
 elif [[ $OPSYS == "windows" ]]; then
 	echo "--[WINDOWS setup]--"
