@@ -39,7 +39,8 @@ namespace Light {
 		OP_NOTIFY,
 		OP_END,
 		OP_SET,
-		OP_IF
+		OP_IF,
+		OP_ASYNC
 	} OP_CODE;
 	
 	typedef enum : char {
