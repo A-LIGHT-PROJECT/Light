@@ -7,7 +7,7 @@ echo
 
 if [[ $userinput == "a" ]]; then
 	read -p "Message: " gitmsg
-	git add . && git commit -m $gitmsg
+	git add . && git commit -m "$gitmsg"
 	git push origin main
 elif [[ $userinput == "s" ]]; then
 	chromium github.com/midlevelgamedev/light &> /dev/null &

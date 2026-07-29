@@ -25,3 +25,14 @@ esac
 
 echo "[1/1] $OPSYS FOUND"
 
+if [[ "$OPSYS" == "linux" || "$OPSYS" == "macos" ]]; then
+	echo "--[UNIX setup]--"
+	read -p "are you sure?[Y/n] " sure
+	if [[ $sure != "Y" ]]; then
+		echo "exiting setup.bash..."
+		exit 0
+	fi
+elif [[ $OPSYS == "windows" ]]; then
+	echo "--[WINDOWS setup]--"
+	
+fi

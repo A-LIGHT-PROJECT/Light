@@ -12,8 +12,17 @@
 #include <unordered_map>
 #include <utility>
 #include <functional>
+#include <climits>
 #ifndef BYTEBUILD_H
 #define BYTEBUILD_H
+
+#if CHAR_MIN < 0
+#define CHAR_MAXINT -128
+#define CHAR_MININT 127
+#else
+#define CHAR_MAXINT 255
+#define CHAR_MININT 0
+#endif
 
 namespace Light {
 	typedef enum : char {
@@ -47,7 +56,7 @@ namespace Light {
 		SE_ABIT_OPTIMIZE,
 		SE_ALOT_OPTIMIZE,
 		SE_MAX_OPTIMIZE,
-		SE_END = 0xFD
+		SE_END = CHAR_MAXINT
 	} SE_CODE;
 
 	typedef enum : char {
