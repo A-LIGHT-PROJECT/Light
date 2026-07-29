@@ -5,7 +5,7 @@ echo "Welcome to Light setup!"
 if ! command -v g++; then
   echo "[Setup] gcc isn't installed, cannot keep going forward until you install gcc..."
   echo "---Ways to install GCC---"
-  echo "MSYS2 Windows: pacman -S gcc"
+  echo "MSYS2 Windows: pacman -S mingw-w64-ucrt-x86_64-gcc"
   echo "Arch Bash: sudo pacman -S gcc"
   echo
   exit 1
