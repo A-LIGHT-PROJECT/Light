@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <Light.hpp>
 
 int main(int argc, char** argv) {
 	if (argc == 1) {
@@ -8,15 +10,19 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	
-	std::vector<std::string> arguments;
+	char* arg1 = argv[1];
+	std::string argument1 = (std::string)arg1;
 
-	for (int i = 0; i < argc; i++) {
-		arguments.push_back(argv[i]);
+	std::ofstream thefile(argument1);
+	
+	char getChar;
+	Light::Bytecode bytecode;
+
+	while (getChar = thefile.get()) {
+		bytecode.push_back(getChar);
 	}
 
-	for (int i = 0; i < argc; i++) {
-		std::cout << "file interpret thing\n";
-	}
+	Light::interpret(bytecode);
 
 	return 0;
 }
