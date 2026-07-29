@@ -63,7 +63,7 @@ EOF
 	
 	tempPATH="./.templightfolder"
 	gcc -I $tempPATH -c ${tempPATH}/Light.cpp -o ${tempPATH}/LightMod.o
-	
+
 	rm -rf $tempPATH
 
 elif [[ $OPSYS == "windows" ]]; then
