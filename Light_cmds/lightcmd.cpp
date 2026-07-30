@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	char* arg1 = argv[1];
 	std::string argument1 = (std::string)arg1;
 
-	std::ofstream thefile(argument1);
+	std::ifstream thefile(argument1);
 	
 	char getChar;
 	Light::Bytecode bytecode;

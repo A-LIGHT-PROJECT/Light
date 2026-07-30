@@ -51,11 +51,11 @@ EOF
 		exit 0
 	fi
 	echo "[Setup] setting up light and lightinfo binaries..."
-	if [ -d ./.templightfolder ]; then
-		rm -rf ./.templightfolder
+	if [ -d ./templightfolder ]; then
+		rm -rf ./templightfolder
 	fi
-	mkdir ./.templightfolder
-	cd ./.templightfolder
+	mkdir ./templightfolder
+	cd ./templightfolder
 	
 	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.hpp	
 	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.cpp
@@ -65,10 +65,10 @@ EOF
 
 	cd ..
 	
-	tempPATH="./.templightfolder"
+	tempPATH="./templightfolder"
 	g++ -I $tempPATH -c ${tempPATH}/Light.cpp -o ${tempPATH}/LightMod.o
-	g++ -I $tempPATH -c ${tempPATH}/Lightcmd.cpp -o ${tempPATH}/light.o
-	g++ -I $tempPATH -c ${tempPATH}/Lightinfo.cpp -o ${tempPATH}/lightinfo.o
+	g++ -I $tempPATH -c ${tempPATH}/lightcmd.cpp -o ${tempPATH}/light.o
+	g++ -I $tempPATH -c ${tempPATH}/lightinfo.cpp -o ${tempPATH}/lightinfo.o
 
 	ModObject="${tempPATH}/LightMod.o"
 	Cmdo1="${tempPATH}/light.o"
