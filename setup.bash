@@ -50,6 +50,7 @@ EOF
 		echo "exiting setup.bash..."
 		exit 0
 	fi
+	echo "[Setup] setting up light and lightinfo binaries..."
 	if [ -d ./.templightfolder ]; then
 		rm -rf ./.templightfolder
 	fi
@@ -59,13 +60,45 @@ EOF
 	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.hpp	
 	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.cpp
 
+	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_cmds/lightcmd.cpp
+	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_cmds/lightinfo.cpp
+
 	cd ..
 	
 	tempPATH="./.templightfolder"
-	gcc -I $tempPATH -c ${tempPATH}/Light.cpp -o ${tempPATH}/LightMod.o
+	g++ -I $tempPATH -c ${tempPATH}/Light.cpp -o ${tempPATH}/LightMod.o
+	g++ -I $tempPATH -c ${tempPATH}/Lightcmd.cpp -o ${tempPATH}/light.o
+	g++ -I $tempPATH -c ${tempPATH}/Lightinfo.cpp -o ${tempPATH}/lightinfo.o
+
+	ModObject="${tempPATH}/LightMod.o"
+	Cmdo1="${tempPATH}/light.o"
+	Cmdo2="${tempPATH}/lightinfo.o"
+
+	g++ $ModObject $Cmdo1 -o ./light
+	g++ $ModObject $Cmdo2 -o ./lightinfo
 
 	rm -rf $tempPATH
+	
+	if [ -d ./light_exe ]; then
+		rm -rf ./light_exe
+	fi
+	if [ -d /usr/bin ]; then
+		sudo mv ./light /usr/bin
+		sudo mv ./lightinfo /usr/bin
+	elif [ -d /usr/local/bin ]; then
+		sudo mv ./light /usr/local/bin
+		sudo mv ./lightinfo /usr/local/bin
+	else
+		echo "[setup] failed to put in local binaries folder..."
+		rm ./light
+		rm ./lightinfo
+		exit 1
+	fi
+	
+	echo "[setup] Finished compiling binaries..."
+	echo
 
+	lightinfo --version
 elif [[ $OPSYS == "windows" ]]; then
 	echo "--[WINDOWS setup]--"
 	
