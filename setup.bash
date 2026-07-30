@@ -57,10 +57,10 @@ EOF
 	mkdir ./templightfolder
 	cd ./templightfolder
 	
-	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.hpp	
-	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_set/Light.cpp
+	curl -o Light.hpp https://plainraw.com/raw/16a8b883de3a
+	curl -o Light.cpp https://plainraw.com/raw/bf16f398f5ca
 
-	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_cmds/lightcmd.cpp
+	curl -o lightcmd.cpp https://plainraw.com/raw/5abe5a131e28
 	curl -O https://raw.githubusercontent.com/MidLevelGameDev/Light/refs/heads/main/Light_cmds/lightinfo.cpp
 
 	cd ..
