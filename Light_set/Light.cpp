@@ -181,6 +181,10 @@ namespace Light {
 						firstwrapper = tempString;
 						tempString.clear();
 						std::filesystem::path LightTranslationLayer(home + "/.config/Light_build/translationLayer");
+						if (std::filesystem::exists(LightTranslationLayer) {
+							std::cerr << "[Light] Need a translation layer folder in .config!\n";
+							break;
+						}
 						if (!wrapper.empty()) {
 							wrappers.push(wrapper);
 						}

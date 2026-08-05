@@ -48,6 +48,7 @@ namespace Light {
 		SE_SOURCE,
 		SE_VERSION,
 		SE_STR_NONFLAG,
+		SE_OUTPUT,
 		SE_VERBOSE,
 		SE_QUIET,
 		SE_WALL,
