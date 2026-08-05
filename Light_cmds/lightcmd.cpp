@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <Light.hpp>
+#include <ligbus.hpp>
 
 int main(int argc, char** argv) {
 	if (argc == 1) {
@@ -16,12 +16,16 @@ int main(int argc, char** argv) {
 	std::ifstream thefile(argument1);
 	
 	char getChar;
-	Light::Bytecode bytecode;
+	int charNum = 0;
+	std::string bytecode;
 
 	while (getChar = thefile.get()) {
+		if (thefile.eof()) {
+			break;
+		}
 		bytecode.push_back(getChar);
 	}
-
+	
 	Light::interpret(bytecode);
 
 	return 0;
