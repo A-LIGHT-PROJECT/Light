@@ -3,20 +3,21 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
+#include <vector>
+#include <lightexe.h>
 #include <ligbus.hpp>
 
 namespace Light {
 	void interpret(std::string bytecode) {
 		// Initialization
-		std::stack<std::string> Stack;
-		std::string Construction;
+		std::stack<std::vector<char*>> Stack;
+		std::string tempString;
+		std::vector<char*> Construction;
 		char Argument1 = OP_NULL;
 		char arguments;
 		bool Exit_program = false;
 		bool IsString = false;
-		bool IfState = false;
 		bool DoNothingTilEnd = false;
-		char ConditionNeed = IF_NULL;
 		int NeedArguments = 0;
 		
 		// Output
@@ -24,6 +25,10 @@ namespace Light {
 			if (IsString) {
 				if (byte == OP_STR) {
 					IsString = false;
+					if (Argument1 == OP_DEF) {
+						Construction.push_back((char*)tempString.c_str());
+					}
+					tempString.clear();
 					Argument1 = OP_NULL;
 					continue;
 				}
@@ -32,11 +37,7 @@ namespace Light {
 					break;
 				}
 
-				switch (Argument1) {
-					case OP_DEF:
-						Construction += byte;
-						break;
-				}
+				tempString += byte;
 				continue;
 			}
 			if (Exit_program) 
@@ -60,10 +61,14 @@ namespace Light {
 						break;
 					}
 					Stack.push(Construction);
+					Construction.clear();
 					break;
 				case OP_EXEC: {
-					const char* Wrapper = Stack.top().c_str();
-					std::system(Wrapper);
+					if (Stack.empty()) {
+						break;
+					}
+					char* const* Wrapper = Stack.top().data();
+					spawnexee(Wrapper);
 					break;
 				}
 				case OP_POP:
