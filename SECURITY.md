@@ -7,7 +7,7 @@ currently being supported with security updates.
 
 | Version | Supported          | Release  |
 | ------- | ------------------ | -------- |
-| 1.0v    |  Not released.     | August 15th |
+| 1.0v    |  Not released.     | Late August |
 | Demos   |  ✅                | ???     |
 
 ## Reporting a Vulnerability
