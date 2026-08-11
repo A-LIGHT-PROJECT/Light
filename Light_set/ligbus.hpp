@@ -18,7 +18,8 @@ namespace Light {
 		OP_EXEC,
 		OP_POP,
 		OP_CHECK,
-		OP_JMP
+		OP_JMP,
+		OP_DECLARE
 	} OP_CODE;
 
 	extern void interpret(std::string bytecode);

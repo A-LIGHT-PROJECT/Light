@@ -1,45 +1,77 @@
 #include <iostream>
 #include <stack>
-#include <vector>
 #include <string>
 #include <cstdlib>
-#include <vector>
 #include <lightexe.h>
 #include <ligbus.hpp>
 
 namespace Light {
 	void interpret(std::string bytecode) {
 		// Initialization
-		std::stack<std::vector<char*>> Stack;
+		std::stack<char**> Stack;
+		char** Declaration = nullptr;
 		std::string tempString;
-		std::vector<char*> Construction;
 		char Argument1 = OP_NULL;
 		char arguments;
 		bool Exit_program = false;
 		bool IsString = false;
-		bool DoNothingTilEnd = false;
-		int NeedArguments = 0;
-		
+		bool NeedNumberedArgument = true;
+		char ArgByte1, ArgByte2;
+		int byteNum = 0;
+		int byteJumps = 0;
+	
 		// Output
-		for (char byte : bytecode) {	
+		for (char byte : bytecode) {
+			if (Exit_program) 
+			{
+				break;
+			}
+
+			byteNum++;
+			if (byteJumps) {
+				byteJumps--;
+				continue;
+			}
+			if (NeedNumberedArgument) {
+				if (!ArgByte1) {
+					ArgByte1 = byte;
+				} else {
+					ArgByte2 = byte;
+					if (Argument1 = OP_JMP) {
+						byteJump = (ArgByte1 << 8) | ArgByte2;
+						ArgByte1 = 0;
+						ArgByte2 = 0;
+					} else if (Argument2 = OP_DECLARE) {
+						if (Declaration != nullptr) {
+							std::free(Declaration);
+							Declaration = nullptr;
+						}
+						size_t allocCommands = (ArgByte1 << 8) | ArgByte2;
+						Declaration = (char**) std::malloc(allocCommands * sizeof(char*));
+					}
+
+				}
+				continue;
+			}
 			if (IsString) {
 				if (byte == OP_STR) {
 					IsString = false;
 					if (Argument1 == OP_DEF) {
-						Construction.push_back((char*)tempString.c_str());
+						Declaration[DeclarationNumber] = tempString.c_str();
 					}
 					tempString.clear();
 					Argument1 = OP_NULL;
 					continue;
 				}
 				if (Argument1 == OP_NULL) {
-					std::cerr << "ARG 1 IS OP_NULL; OP_NULL DOESN'T NEED ARGUMENTS; OP_EXIT IS INIT IMMEDIATE;\n";
+					std::cerr << "[Light] ARG 1 IS OP_NULL; OP_NULL DOESN'T NEED ARGUMENTS; OP_EXIT IS INIT IMMEDIATE; AT LINE " << byteNum << "\n";
 					break;
 				}
 
 				tempString += byte;
 				continue;
 			}
+
 			if (Exit_program) 
 			{
 				break;
@@ -53,7 +85,12 @@ namespace Light {
 				case OP_STR:
 					IsString = true;
 					break;
-				case OP_DEF:
+				case OP_DEF:	
+					if (!DeclarationNumber) {
+						std::cerr << "[Light] MUST OP_DECLARE; OP_DEF AFTER IT; OP_EXIT IS INIT IMMEDIATE;\n";
+						Exit_program = true;
+						break;
+					}
 					Argument1 = OP_DEF;
 					break;
 				case OP_PUSH:
@@ -67,7 +104,7 @@ namespace Light {
 					if (Stack.empty()) {
 						break;
 					}
-					char* const* Wrapper = Stack.top().data();
+					char** Wrapper = Stack.top();
 					spawnexee(Wrapper);
 					break;
 				}
@@ -77,9 +114,23 @@ namespace Light {
 					}
 					Stack.pop();
 					break;
+				case OP_DECLARE:
+					Argument1 = OP_DECLARE;
+					NeedNumberedArgument = true;
+					break;
+				case OP_JMP:
+					Argument1 = OP_JMP;
+					NeedNumberedArgument = true;
+					break;
+				case OP_CHECK:
+					Argument1 = OP_CHECK;
+					break;
+				default:
+					std::cerr << "[Light] INVALID BYTE DETECTED; OP_EXIT IS INIT IMMEDIATE;\n";
 			}
 		}
 
 		// Overview
+		std::free(Declaration);
 	}
 }
