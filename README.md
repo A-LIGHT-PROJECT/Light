@@ -4,7 +4,7 @@ Light is a build system intended to be made for speedy build system compilation 
 # Goals of Light
 - Make a cross-compatiable build system that doesn't run exclusively for Linux or Windows!
 - Reduce dependency overhead using pure standard libraries!
-- Make building much more faster when running these files without parser overhead!
+- Make building and installing much more faster when running these files without parser overhead!
 
 This immediate representation was made so developers and users can run executables as quickly as possible while being greeted with a friendly interface!
 
