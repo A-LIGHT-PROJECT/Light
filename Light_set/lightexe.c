@@ -11,11 +11,11 @@
 #include <windows.h>
 #endif
 
-int spawnexee(char* const* argv) {
+int spawnexee(char** argv, int AmountCount) {
 #ifdef _WIN32
 
 #else
-		
+		argv[AmountCount] = NULL;
 		pid_t child_pid;
 		int ret = posix_spawnp(&child_pid, argv[0], NULL, NULL, argv, environ);
 

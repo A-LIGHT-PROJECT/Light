@@ -5,7 +5,7 @@ extern "C" {
 #endif
 
 extern char** environ;
-extern int spawnexee(char* const* argv);
+extern int spawnexee(char** argv, int AmountCount);
 
 typedef struct {
 	char* c_str;

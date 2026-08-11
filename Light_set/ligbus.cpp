@@ -17,6 +17,7 @@ namespace Light {
 		bool IsString = false;
 		bool NeedNumberedArgument = true;
 		char ArgByte1, ArgByte2;
+		int DeclarationAmount = 0;
 		int byteNum = 0;
 		int byteJumps = 0;
 	
@@ -45,8 +46,10 @@ namespace Light {
 						if (Declaration != nullptr) {
 							std::free(Declaration);
 							Declaration = nullptr;
+							DeclarationAmount = 0;
 						}
-						size_t allocCommands = (ArgByte1 << 8) | ArgByte2;
+						size_t allocCommands = ((ArgByte1 << 8) | ArgByte2) + 1;
+						DeclarationAmount = ((ArgByte1 << 8) | ArgByte2);
 						Declaration = (char**) std::malloc(allocCommands * sizeof(char*));
 					}
 
@@ -105,7 +108,7 @@ namespace Light {
 						break;
 					}
 					char** Wrapper = Stack.top();
-					spawnexee(Wrapper);
+					spawnexee(Wrapper, DeclarationAmount);
 					break;
 				}
 				case OP_POP:
@@ -131,6 +134,8 @@ namespace Light {
 		}
 
 		// Overview
-		std::free(Declaration);
+		if (Declaration != nullptr) {
+			std::free(Declaration);
+		}
 	}
 }
