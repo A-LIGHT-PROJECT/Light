@@ -1,35 +1,24 @@
 # Light
-Light is a build system intended to be made for speedy AOT compilation and have control over what files gets checked.
+Light is a build system intended to be made for speedy build system compilation and cross-compatiablity with building your C, C++, Assembly, and Rust projects!
 
 # Goals of Light
-- Make Light best made for big codebases that handles Assembly, C/C++, etc...
-- Make Light be as fast as possible at runtime for building...
-- Make building much more easier
+- Make a cross-compatiable build system that doesn't run exclusively for Linux or Windows!
+- Reduce dependency overhead using pure standard libraries!
+- Make building much more faster when running these files without parser overhead!
+
+This immediate representation was made so developers and users can run executables as quickly as possible while being greeted with a friendly interface!
 
 # Light be your build system!
-More information on this soon, releasing late August
+More information on this soon, releasing late August!
 
-# Light Language
-This build system has a language that can be similar to assembly.
-```
-.make:
-  construction_strings "gcc thisprogram.c -o thisprogram"
-  push
-  execute
-  pop
-```
-In order to compile this, you'll do
-```
-light "main.light"
-```
-This will compile and execute your IR binary to Light IR.
-You can execute this again using the same command but it will be much faster.
+# Light Builder
 
-In order to recompile in the command line, you can do
+You can run .llll files using
 ```
-light --make "main.light"
+ligbus-1 file.llll
 ```
-This will recompile your Light binaries however this will not execute your .light file so you may have to do the same light command execution again.
+Specific version numbers will be at the end of each version released, such as LIGBUS 1 or LIGBUS 2.
+This is specifically for backwards compatability with other build systems.
 
 # Light bytecode
 This build system compiles to bytecode that has a very minimal amount of OP_CODES that is ran by a virtual machine. Since most of the verbose thinking is done by the parser, this bytecode will execute much faster at runtime than before!
