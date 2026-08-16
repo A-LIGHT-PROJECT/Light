@@ -23,7 +23,7 @@ You can run .light files using
 ```
 light26 file.light
 ```
-Specific version numbers will be at the end of each version released, such as LIGBUS 1 or LIGBUS 2.
+Specific version numbers will be at the end of each version released, such as light26 or light27
 This is specifically for backwards compatability with other build systems.
 
 # Light bytecode
