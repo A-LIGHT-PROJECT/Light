@@ -3,6 +3,7 @@
 #include <light26.hpp>
 #include <execlight26.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 int LightProcessor(char* Bytecode, long PointTo) {
 	char PointingByte;
