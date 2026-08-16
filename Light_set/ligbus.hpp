@@ -22,7 +22,7 @@ namespace Light {
 		OP_DECLARE
 	} OP_CODE;
 
-	extern void interpret(std::string bytecode);
+	extern void interpret(char* bytecode);
 }
 
 #endif

@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <filesystem>
 #include <ligbus.hpp>
 
 int main(int argc, char** argv) {
@@ -13,17 +14,16 @@ int main(int argc, char** argv) {
 	char* arg1 = argv[1];
 	std::string argument1 = (std::string)arg1;
 
-	std::ifstream thefile(argument1);
-	
-	char getChar;
-	int charNum = 0;
-	std::string bytecode;
+	std::filesystem::path myfile(argument1);
 
-	while (getChar = thefile.get()) {
-		if (thefile.eof()) {
-			break;
-		}
-		bytecode.push_back(getChar);
+	std::ifstream thefile(argument1, std::ios::binary);
+
+	uintmax_t charNum = 0;
+	char* bytecode;
+	
+	if (thefile.is_open()) {
+		charNum = std::filesystem::file_size(myfile);
+		thefile.read(&bytecode[0], charNum);
 	}
 	
 	Light::interpret(bytecode);

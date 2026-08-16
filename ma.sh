@@ -1,13 +1,21 @@
-gcc -I Light_set -c Light_set/lightexe.c -o lightexe.o
-g++ -I Light_set -c Light_set/ligbus.cpp -o light.o
-g++ -I Light_set -c Light_cmds/lightcmd.cpp -o lightcmd.o
 
-g++ lightcmd.o lightexe.o light.o -o TestLight/light
+if [ "$1" == "compile" ]; then
+	g++ -Wall -Wextra -Werror -I Light_set -c Light_cmd/lightcmd.cpp -o light26cmd.o
 
-g++ -I Light_set -c TestLight/parselight.cpp -o TestLight/parseit.o
+	g++ -Wall -Wextra -Werror -I Light_set -c Light_set/light26.cpp -o light26.o
 
-g++ lightexe.o light.o TestLight/parseit.o -o ./TestLight/parseit
+	gcc -Wall -Wextra -Werror -I Light_set -c Light_set/execlight26.c -o light26exec.o
 
-./TestLight/parseit
+	read -n 1 -p "safe_check [Y]: " SafeCheck
+	if [ "$SafeCheck" != "Y" ]; then
+		exit 0
+	fi
 
-rm lightcmd.o light.o lightexe.o
+	g++ light26cmd.o light26.o light26exec.o -o TestLight/light26
+
+	rm light26cmd.o light26.o light26exec.o
+else
+	g++ -fsyntax-only -g -Wall -Wextra -Werror -I Light_set -c Light_cmds/lightcmd.cpp
+	g++ -fsyntax-only -g -Wall -Wextra -Werror -I Light_set -c Light_set/light26.cpp
+	gcc -fsyntax-only -g -Wall -Wextra -Werror -I Light_set -c Light_set/execlight26.c
+fi

@@ -6,43 +6,45 @@
 #include <ligbus.hpp>
 
 namespace Light {
-	void interpret(std::string bytecode) {
+	void interpret(char* bytecode) {
 		// Initialization
 		std::stack<char**> Stack;
 		char** Declaration = nullptr;
 		std::string tempString;
 		char Argument1 = OP_NULL;
-		char arguments;
 		bool Exit_program = false;
 		bool IsString = false;
 		bool NeedNumberedArgument = true;
 		char ArgByte1, ArgByte2;
 		int DeclarationAmount = 0;
+		int DeclarationNumber = 0;
 		int byteNum = 0;
 		int byteJumps = 0;
-	
+		
+		std::cout << "go into loop!\n";
 		// Output
 		for (char byte : bytecode) {
-			if (Exit_program) 
-			{
-				break;
-			}
-
+			std::cout << "hello\n";
 			byteNum++;
+			std::cout << "process " << byteNum << "\n";
+			if (byteNum <= 2) {
+				continue;
+			}
 			if (byteJumps) {
 				byteJumps--;
 				continue;
 			}
 			if (NeedNumberedArgument) {
+				std::cout << "There\n";
 				if (!ArgByte1) {
 					ArgByte1 = byte;
 				} else {
 					ArgByte2 = byte;
-					if (Argument1 = OP_JMP) {
-						byteJump = (ArgByte1 << 8) | ArgByte2;
+					if (Argument1 == OP_JMP) {
+						byteJumps = (ArgByte1 << 8) | ArgByte2;
 						ArgByte1 = 0;
 						ArgByte2 = 0;
-					} else if (Argument2 = OP_DECLARE) {
+					} else if (Argument1 == OP_DECLARE) {
 						if (Declaration != nullptr) {
 							std::free(Declaration);
 							Declaration = nullptr;
@@ -60,7 +62,7 @@ namespace Light {
 				if (byte == OP_STR) {
 					IsString = false;
 					if (Argument1 == OP_DEF) {
-						Declaration[DeclarationNumber] = tempString.c_str();
+						Declaration[DeclarationNumber] = (char*)tempString.c_str();
 					}
 					tempString.clear();
 					Argument1 = OP_NULL;
@@ -79,6 +81,7 @@ namespace Light {
 			{
 				break;
 			}
+			std::cout << "hello\n";
 			switch (byte) {
 				case OP_NULL:
 					break;
@@ -89,19 +92,19 @@ namespace Light {
 					IsString = true;
 					break;
 				case OP_DEF:	
-					if (!DeclarationNumber) {
-						std::cerr << "[Light] MUST OP_DECLARE; OP_DEF AFTER IT; OP_EXIT IS INIT IMMEDIATE;\n";
+					if (DeclarationNumber >= DeclarationAmount) {
+						std::cerr << "[Light] MUST OP_DECLARE; DECLARATION ELEMENTS TOO LARGE; OP_EXIT IS INIT IMMEDIATE;\n";
 						Exit_program = true;
 						break;
 					}
 					Argument1 = OP_DEF;
 					break;
 				case OP_PUSH:
-					if (Construction.empty()) {
+					if (DeclarationNumber <= 0) {
 						break;
 					}
-					Stack.push(Construction);
-					Construction.clear();
+					std::cout << "hi\n";
+					Stack.push(Declaration);
 					break;
 				case OP_EXEC: {
 					if (Stack.empty()) {
