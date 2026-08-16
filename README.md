@@ -1,21 +1,27 @@
 # Light
-Light is a build system intended to be made for speedy build system compilation and cross-compatiablity with building your C, C++, Assembly, and Rust projects!
+Light is an installer intended to be made for cross-compatiablity with building your C, C++, Assembly, and Rust projects!
 
 # Goals of Light
 - Make a cross-compatiable build system that doesn't run exclusively for Linux or Windows!
-- Reduce dependency overhead using pure standard libraries!
+- Reduce dependency overhead using pure standard libraries in C!
 - Make building and installing much more faster when running these files without parser overhead!
+- Have a visually appealing installation for all users using light!
 
 This immediate representation was made so developers and users can run executables as quickly as possible while being greeted with a friendly interface!
 
+# Following guidelines for languages
+There is some guidelines that are meant to show you how to use light, light will have its different versions and backwards compatability will be a concern to people when it affects them.
+Each version may have their own guidelines and may have outdated guidelines not used by a current version.
+Check out PARSER_GUIDELINES.md for more information!
+
 # Light be your build system!
-More information on this soon, releasing late August!
+More information on this soon, releasing soon!
 
 # Light Builder
 
-You can run .llll files using
+You can run .light files using
 ```
-ligbus-1 file.llll
+light26 file.light
 ```
 Specific version numbers will be at the end of each version released, such as LIGBUS 1 or LIGBUS 2.
 This is specifically for backwards compatability with other build systems.
