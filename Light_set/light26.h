@@ -1,6 +1,7 @@
 #ifndef _LIGHT26_
-#define _LIGHT26_ 1
-#include <LightDef.hpp>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef enum : char {
 	LIGHT_OP_EXIT,
@@ -14,4 +15,7 @@ typedef enum : unsigned {
 
 extern int LightProcessor(char* Bytecode, long PointTo);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
