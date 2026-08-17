@@ -14,9 +14,6 @@ There is some guidelines that are meant to show you how to use light, light will
 Each version may have their own guidelines and may have outdated guidelines not used by a current version.
 Check out PARSER_GUIDELINES.md for more information!
 
-# Light be your build system!
-More information on this soon, releasing soon!
-
 # Light Builder
 
 You can run .light files using
