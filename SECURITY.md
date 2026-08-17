@@ -7,8 +7,7 @@ currently being supported with security updates.
 
 | Version | Supported          | Release  |
 | ------- | ------------------ | -------- |
-| 1.0v    |  Not released.     | Late August |
-| Demos   |  ✅                | ???     |
+| Light26   |  Not released.     | ??? |
 
 ## Reporting a Vulnerability
 
