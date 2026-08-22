@@ -7,7 +7,7 @@ extern "C" {
 extern char** environ;
 #endif
 
-extern void LightExec(char** declaration);
+extern int LightExec(char* const* argv);
 
 #ifdef __cplusplus
 }

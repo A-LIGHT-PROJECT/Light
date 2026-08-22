@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <cstdio>
+#include <cstdlib>
 #include <light26.h>
 
 int main(int argc, char** argv) {
@@ -18,14 +20,17 @@ int main(int argc, char** argv) {
 	std::ifstream thefile(argument1, std::ios::binary);
 
 	uintmax_t charNum = 0;
-	char* bytecode;
+	char* bytecode = nullptr;
 	
 	if (thefile.is_open()) {
 		charNum = std::filesystem::file_size(myfile);
+		bytecode = (char*) std::malloc(charNum * sizeof(char));
 		thefile.read(&bytecode[0], charNum);
 	}
 	
-	Light::interpret(bytecode);
+	LightProcessor(bytecode, 0);
+
+	std::free(bytecode);
 
 	return 0;
 }

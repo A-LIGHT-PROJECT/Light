@@ -17,7 +17,7 @@ int LightExec(char* const* argv) {
 #else
 		
 		pid_t child_pid;
-		int ret = posix_spawn(&child_pid, argv[0], NULL, NULL, argv, environ);
+		int ret = posix_spawnp(&child_pid, argv[0], NULL, NULL, argv, environ);
 
 	//	for (int i = 0; i < sizeof(argv) / sizeof(argv[0]); i++) {
 	//		printf("%s\n", argv[i]);
@@ -36,6 +36,7 @@ int LightExec(char* const* argv) {
 		} else {
 			if (WIFSIGNALED(wstatus)) {
 				printf("[Light] SIGNALED WAITPID STATUS: %d\n", WTERMSIG(wstatus));
+				printf("%s %s %s\n", argv[0], argv[1], argv[2]);
 			}
 		};
 

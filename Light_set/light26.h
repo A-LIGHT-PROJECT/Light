@@ -10,7 +10,8 @@ typedef enum : char {
 
 typedef enum : unsigned {
 	LIGHT_MODE_ROOT = 0,
-	LIGHT_MODE_STRING
+	LIGHT_MODE_STRING,
+	LIGHT_MODE_INIT_STRING
 } LIGHT_OP_MODE;
 
 extern int LightProcessor(char* Bytecode, long PointTo);
