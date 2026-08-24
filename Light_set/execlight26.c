@@ -11,10 +11,8 @@
 #include <windows.h>
 #endif
 
+#ifndef _WIN32
 int LightExec(char* const* argv) {
-#ifdef _WIN32
-	
-#else
 		
 		pid_t child_pid;
 		int ret = posix_spawnp(&child_pid, argv[0], NULL, NULL, argv, environ);
@@ -39,8 +37,10 @@ int LightExec(char* const* argv) {
 				printf("%s %s %s\n", argv[0], argv[1], argv[2]);
 			}
 		};
-
-#endif
 	return 0;
 }
-
+#else
+int LightExec(wchar_t* argv) {
+	
+}
+#endif

@@ -11,11 +11,14 @@ int LightProcessor(char* Bytecode, long PointTo) {
 	uint32_t Pointer = PointTo;
 	bool EXIT_PROGRAM = false;
 	int LightMode = 0;
-	char** declaration = NULL;
 	int declarationNum = 0;
+#ifdef _WIN32
+	wchar_t* declaration = NULL;
+#else
+	char** declaration = NULL;
 	int tempStringNum = 0;
 	char* tempString = NULL;
-
+#endif
 	printf("before processes v1\n");
 
 	while (!EXIT_PROGRAM) {
@@ -24,6 +27,7 @@ int LightProcessor(char* Bytecode, long PointTo) {
 		if (LightMode) {
 			switch (LightMode) {
 				case LIGHT_MODE_INIT_STRING:
+#ifndef _WIN32
 					tempString = malloc(1 * sizeof(char));
 					declaration = malloc(2 * sizeof(char*));
 					LightMode = LIGHT_MODE_STRING;
@@ -64,6 +68,28 @@ int LightProcessor(char* Bytecode, long PointTo) {
 					}
 					tempString[tempStringNum++] = PointingByte;
 					break;
+#else
+				case LIGHT_MODE_INIT_STRING:
+					declaration = malloc(1 * sizeof(wchar_t*));
+					LightMode = LIGHT_MODE_STRING;
+					break;
+				case LIGHT_MODE_STRING:
+					if (PointingByte == '\0') {
+						LightExec(declaration);
+						break;
+					}
+					{
+						wchar_t* temp = (wchar_t*) realloc(declaration, (declarationNum + 2) * sizeof(wchar_t));
+						if (temp == NULL) {
+							printf("[Light26 Reallocation not worked properly\n");
+							EXIT_PROGRAM = true;
+							break;
+						}
+						declaration = temp;
+					}
+					declaration[declarationNum++] = (wchar_t) PointingByte;
+					declaration[declarationNum] = '\0';
+#endif
 			}
 			Pointer++;
 			continue;
