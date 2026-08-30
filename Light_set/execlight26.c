@@ -48,8 +48,14 @@ int LightExec(wchar_t* argv) {
 		return 1;
 	}
 	
-	if (WaitForSingleObject(process_informationWchar.hProcess	
-
+	if (WaitForSingleObject(process_informationWchar.hProcess, INFINITE) == WAIT_FAILED) {
+		printf("[Light26] Did not return WAIT_OBJECT_0\n");
+		printf("[Light26] WAITFORSINGLEOBJECT FAILED RETURNED %lu\n", (long unsigned)GetLastError());
+		return 1;
+	}
+	
+	CloseHandle(startupinfoWchar.hProcess);
+	CloseHandle(process_informationWchar.hThread);
 	return 0;
 }
 #endif
