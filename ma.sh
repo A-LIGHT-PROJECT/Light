@@ -6,16 +6,18 @@ if [ "$1" == "compile" ]; then
 
 	gcc -Wall -Wextra -Werror -I Light_set -c Light_set/execlight26.c -o light26exec.o
 
+	eval gcc -Wall -Wextra -Werror -I Light_set -c Light_set/viewlight26.c -o light26view.o $(pkg-config --cflags sdl3)
+
 	read -n 1 -p "safe_check [Y]: " SafeCheck
 	echo
 	if [ "$SafeCheck" != "Y" ]; then
 		exit 0
 	fi
 
-	g++ light26cmd.o light26.o light26exec.o -o TestLight/light26
+	eval g++ light26cmd.o light26.o light26exec.o light26view.o -o TestLight/light26 $(pkg-config --libs sdl3)
 	g++ TestLight/parselight.cpp -o TestLight/parseit
 
-	rm light26cmd.o light26.o light26exec.c
+	rm light26cmd.o light26.o light26exec.c light26view.o
 elif [ "$1" == "windows" ]; then
 	x86_64-w64-mingw32-g++ -g -Wall -Wextra -Werror -I Light_set -c Light_cmds/lightcmd.cpp -o light26cmdwin.o
 	x86_64-w64-mingw32-gcc -g -Wall -Wextra -Werror -I Light_set -c Light_set/light26.c -o light26win.o

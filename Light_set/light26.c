@@ -106,6 +106,20 @@ int LightProcessor(char* Bytecode, long PointTo) {
 					}
 					LightMode = 0;
 					break;
+				case LIGHT_MODE_IF_JMP:
+					if (IF_TRUE) {
+						uint32_t numofjumps = (uint32_t) PointingByte;
+						Pointer += numofjumps - 1;
+					}
+					LightMode = 0;
+					break;
+				case LIGHT_MODE_JMP:
+					{
+						uint32_t numofjumps = (uint32_t) PointingByte;
+						Pointer += numofjumps - 1;
+					}
+					LightMode = 0;
+					break;
 			}
 			Pointer++;
 			continue;
@@ -121,6 +135,10 @@ int LightProcessor(char* Bytecode, long PointTo) {
 				LightMode = LIGHT_MODE_IF_SET;
 				break;
 			case LIGHT_IFJMP:
+				LightMode = LIGHT_MODE_IF_JMP;
+				break;
+			case LIGHT_JMP:
+				LightMode = LIGHT_MODE_JMP;
 				break;
 		}
 		Pointer++;
